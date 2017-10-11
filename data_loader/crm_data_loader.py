@@ -4,7 +4,7 @@ from model.entity_to_assign import EntityToMatch
 
 class CrmDataLoader:
 
-    all_entities = {}
+    all_crm_entities = {}
 
     def __init__(self):
         self.conn = None
@@ -35,4 +35,9 @@ class CrmDataLoader:
 
         for entity_row in crm_entities:
             entity = EntityToMatch(name=entity_row[0], nip=entity_row[1])
-            self.all_entities[entity_row[0]].append(entity)
+            self.all_crm_entities.update({entity_row[0]:entity})
+
+    def print_all_crm_entities(self):
+
+        for k, v in self.all_crm_entities.items():
+            print (k, v)

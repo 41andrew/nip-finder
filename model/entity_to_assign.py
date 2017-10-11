@@ -7,4 +7,4 @@ class EntityToMatch:
         self.nip = nip
 
     def __str__(self):
-        return "[{0.name}]".format(self)
+        return "[{0.name}][{0.nip}]".format(self)

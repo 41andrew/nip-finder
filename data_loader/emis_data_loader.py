@@ -1,30 +1,23 @@
 import os
-from model.entity import Entity
+from model.entity_to_assign import EntityToMatch
 import tkinter as tk
 from tkinter import filedialog
 
-class CsvDataLoader:
+class EmisLoader():
 
     def __init__(self):
-        root = tk.Tk()
-        root.withdraw()
-        self.data_path_input = "source_files/entities_to_match.csv"
-        #filedialog.askopenfilename(title='Wybierz plik ze spółkami', filetypes=(('csv files', '*.csv'),))
-        self.input_entities = {}
+        self.all_emis_entities = {}
+        self.data_path_input = "source_files/all_entities.csv"
 
     def load_data(self):
-        """
-        Method responsible for loading data from input csv file
 
-        :return:
-        """
         self._add_input_rows_to_dict()
 
     def _add_input_rows_to_dict(self):
 
         for line in self._read_lines_from_file(self.data_path_input):
-            input_entity = self._parse_object_from_csv_line(line)
-            self.input_entities[input_entity.name] = input_entity
+            emis_entity = self._parse_object_from_csv_line(line)
+            self.all_emis_entities[emis_entity.name] = emis_entity
 
     def _read_lines_from_file(self, file_path):
 
@@ -40,15 +33,14 @@ class CsvDataLoader:
 
         try:
             line = line.strip('\n').split(sep=';')
-            input_entity = Entity(line[0])
+            emis_entity = EntityToMatch(name=line[0], nip=line[1])
 
-            return input_entity
+            return emis_entity
 
         except IndexError as e:
             print(e)
 
-    def print_objects(self):
+    def print_emis_entities(self):
 
-        for x in self.input_entities:
-            print(self.input_entities[x].nip_list)
-
+        for entity in self.all_emis_entities:
+            print (entity, " : ", self.all_emis_entities[entity])

@@ -106,3 +106,6 @@ ENV/
 .DS_Store
 source_files/db.properties
 output_report/*.html
+
+# source_files
+source_files/
