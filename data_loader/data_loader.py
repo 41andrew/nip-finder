@@ -12,6 +12,9 @@ class CsvDataLoader:
         #filedialog.askopenfilename(title='Wybierz plik ze spółkami', filetypes=(('csv files', '*.csv'),))
         self.input_entities = {}
 
+    def get_input_enities_dict(self):
+        return self.input_entities
+
     def load_data(self):
         """
         Method responsible for loading data from input csv file

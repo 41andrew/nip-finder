@@ -9,6 +9,9 @@ class EmisLoader():
         self.all_emis_entities = {}
         self.data_path_input = "source_files/all_entities.csv"
 
+    def get_all_emis_entities(self):
+        return self.all_emis_entities
+
     def load_data(self):
 
         self._add_input_rows_to_dict()

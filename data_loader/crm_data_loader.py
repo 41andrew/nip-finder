@@ -9,6 +9,9 @@ class CrmDataLoader:
     def __init__(self):
         self.conn = None
 
+    def get_crm_entities_dict(self):
+        return CrmDataLoader.all_crm_entities
+
     def connect_to_crm(self):
 
         try:

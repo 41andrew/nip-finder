@@ -1,7 +1,26 @@
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
-import csv
 
+
+class FuzzyMatcher:
+
+    def __init__(self, entities_to_match_list, crm_entities, emis_entities):
+        self.entities_to_match_list = entities_to_match_list
+        self.crm_entities_to_match_list = crm_entities
+        self.emis_entities_to_match_list = emis_entities
+
+    def similarity_checker(self, a, b):
+        return fuzz.ratio(a, b)
+
+    def assign_objects_from_crm(self):
+
+        for entity in self.entities_to_match_list:
+            for entity_to_match in self.crm_entities_to_match_list:
+                ratio = self.similarity_checker(entity, entity_to_match)
+                print ("Porównuję spółkę ", entity, " ze spółką: ", entity_to_match, ". Podobieństwo to: ", ratio, "%")
+                if (ratio > 90):
+                    self.entities_to_match_list[entity].nip_list.append(self.crm_entities_to_match_list[entity_to_match])
+                    print ("Do listy spółki ", entity, " dodaję obiekt: ", self.crm_entities_to_match_list[entity_to_match])
 
 
 print (fuzz.partial_ratio("pkn orlen", "pkn orlen sp. z.o.o."))
