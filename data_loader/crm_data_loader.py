@@ -1,4 +1,4 @@
-import pyodbc
+import pypyodbc
 from model.entity import Entity
 from model.entity_to_assign import EntityToMatch
 
@@ -15,7 +15,7 @@ class CrmDataLoader:
     def connect_to_crm(self):
 
         try:
-            self.conn = pyodbc.connect(r'DRIVER={SQL Server};SERVER=plwawdb20,1113;DATABASE=MARS4_API;Trusted_Connection=yes;')
+            self.conn = pypyodbc.connect(r'DRIVER={SQL Server};SERVER=plwawdb20,1113;DATABASE=MARS4_API;Trusted_Connection=yes;')
             print("Connected to CRM")
         except Exception as e:
             print("Unable to connect to the database")
@@ -38,7 +38,7 @@ class CrmDataLoader:
 
         for entity_row in crm_entities:
             entity = EntityToMatch(name=entity_row[0], nip=entity_row[1])
-            self.all_crm_entities.update({entity_row[0]:entity})
+            CrmDataLoader.all_crm_entities.update({entity_row[0]:entity})
 
     def print_all_crm_entities(self):
 

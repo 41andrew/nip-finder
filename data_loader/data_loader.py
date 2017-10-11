@@ -5,15 +5,17 @@ from tkinter import filedialog
 
 class CsvDataLoader:
 
+    input_entities = {}
+
     def __init__(self):
         root = tk.Tk()
         root.withdraw()
         self.data_path_input = "source_files/entities_to_match.csv"
         #filedialog.askopenfilename(title='Wybierz plik ze spółkami', filetypes=(('csv files', '*.csv'),))
-        self.input_entities = {}
+        #self.input_entities = {}
 
-    def get_input_enities_dict(self):
-        return self.input_entities
+    def get_input_entities_dict(self):
+        return CsvDataLoader.input_entities
 
     def load_data(self):
         """
@@ -27,7 +29,7 @@ class CsvDataLoader:
 
         for line in self._read_lines_from_file(self.data_path_input):
             input_entity = self._parse_object_from_csv_line(line)
-            self.input_entities[input_entity.name] = input_entity
+            CsvDataLoader.input_entities[input_entity.name] = input_entity
 
     def _read_lines_from_file(self, file_path):
 
@@ -52,6 +54,6 @@ class CsvDataLoader:
 
     def print_objects(self):
 
-        for x in self.input_entities:
-            print(self.input_entities[x].nip_list)
+        for x in CsvDataLoader.input_entities:
+            print(CsvDataLoader.input_entities[x].print_assigned_entities())
 
